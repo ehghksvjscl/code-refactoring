@@ -21,7 +21,7 @@ hsm0104(Front-end, React), ehghksvjscl(Back-end, DRF)
 
 ## commit message
 **write** : something write (ex: readme.md, gitignore)  
-**feat** : new funtion  
+**feat** : new funtion and new file  
 **test** : test code  
 **fixed**  : bug fixed  
 
