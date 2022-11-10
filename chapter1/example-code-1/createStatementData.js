@@ -45,10 +45,6 @@ function createStatementData(invoice, plays) {
         return data.performances.reduce((total, p) => total + p.volumeCredits, 0);
     }
 
-    function amountFor(aPerformance) {
-        return new PerformanceCalculator(aPerformance, playFor(aPerformance)).amount;
-    }
-
     function playFor(aPerformance) {
         return plays[aPerformance.playID];
     }
