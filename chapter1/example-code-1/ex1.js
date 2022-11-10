@@ -10,25 +10,7 @@ function statement(invoice, plays) {
 
     for (let perf of invoice.performances) {
         const play = plays[perf.playID];
-        let thisAmount = 0
-
-        switch (play.type) {
-            case "tragedy":
-                thisAmount = 40000;
-                if (perf.audience > 30) {
-                    thisAmount += 1000 * (perf.audience - 30);
-                }
-                break;
-            case "comedy":
-                thisAmount = 30000;
-                if (perf.audience > 20) {
-                    thisAmount += 10000 + 500 * (perf.audience - 20);
-                }
-                thisAmount += 300 * perf.audience;
-                break;
-            default:
-                throw new Error(`알 수 없는 장르: ${play.type}`);
-        }
+        thisAmount = amountFor(perf, play)
 
         // 포인트 적립  
         volumeCredits += Math.max(perf.audience - 30, 0);
@@ -43,6 +25,30 @@ function statement(invoice, plays) {
     result += `총액: ${format(totalAmount/100)}\n`;
     result += `적립 포인트: ${volumeCredits}점\n`;
     return result;
+
+    function amountFor(perf, play) {
+        let result = 0
+
+        switch (play.type) {
+            case "tragedy":
+                result = 40000;
+                if (perf.audience > 30) {
+                    result += 1000 * (perf.audience - 30);
+                }
+                break;
+            case "comedy":
+                result = 30000;
+                if (perf.audience > 20) {
+                    result += 10000 + 500 * (perf.audience - 20);
+                }
+                result += 300 * perf.audience;
+                break;
+            default:
+                throw new Error(`알 수 없는 장르: ${play.type}`);
+        }
+
+        return result
+    }
 }
 
 module.exports = statement;
