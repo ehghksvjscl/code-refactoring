@@ -5,9 +5,9 @@ code-refactoring with javascript, node.js
 ```
 cd chapter *
 cd example-code *
-num install
-num test
-node ex*.js
+npm i
+npm install -g nodemon
+nodemon ch6/6-1.js
 ```
 
 ## test code ref
