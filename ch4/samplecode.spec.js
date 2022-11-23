@@ -18,3 +18,10 @@ test('province -> change production', () => {
     expect(asia.shortfall).toEqual(-6);
     expect(asia.profit).toEqual(292);
 });
+
+test('no producers', () => {
+    const noProducers = new Province({
+        name: "No Producers", producers: [], demand: 30, price: 20,});
+    expect(noProducers.shortfall).toEqual(30);
+    expect(noProducers.profit).toEqual(0);
+}); 
