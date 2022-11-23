@@ -18,6 +18,14 @@ class Reading {
   get baseCharge() {
     return this.baseRate * this.#quantity;
   }
+
+  get taxThreshold() {
+    return 0.1;
+  }
+
+  get taxableCharge() {
+    return Math.max(0, this.baseCharge - this.taxThreshold)
+  }
 }
 
 const reading = new Reading({ customer: 'ivan', quantity: 10, month: 5, year: 2017 });
