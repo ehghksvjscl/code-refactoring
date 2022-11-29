@@ -2,6 +2,10 @@ export class Order {
   constructor(data) {
     this.priority = data.priority;
   }
+
+  get isHighPriority() {
+    return 'high' === this.priority || 'rush' === this.priority
+  }
 }
 
 const orders = [
@@ -10,6 +14,6 @@ const orders = [
   new Order({ priority: 'rush' }),
 ];
 
-const highPriorityCount = orders.filter(
-  (o) => 'high' === o.priority || 'rush' === o.priority
-).length;
+const highPriorityCount = orders.filter((o) => o.isHighPriority).length;
+
+console.log(highPriorityCount);
