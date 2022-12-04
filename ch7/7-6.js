@@ -27,27 +27,9 @@ export class TrackingInformation {
   }
 }
 
-export class Shipment {
-  #trackingInformation;
-  constructor(trackingInformation) {
-    this.#trackingInformation = trackingInformation;
-  }
 
-  get trackingInfo() {
-    return this.#trackingInformation.display;
-  }
+const trackingInformation = new TrackingInformation(999, 'Maersk');
+console.log(trackingInformation.display);
 
-  get trackingInformation() {
-    return this.#trackingInformation;
-  }
-
-  set trackingInformation(trackingInformation) {
-    this.#trackingInformation = trackingInformation;
-  }
-}
-
-const shipment = new Shipment(new TrackingInformation(999, 'Maersk'));
-console.log(shipment.trackingInfo);
-
-shipment.trackingInformation.shippingCompany = 'COSCO';
-console.log(shipment.trackingInfo);
+trackingInformation.shippingCompany = 'COSCO';
+console.log(trackingInformation.display);
