@@ -14,6 +14,14 @@ class Person {
     return this.#department;
   }
 
+  get chargeCode() {
+    return `${this.#department.chargeCode}`;
+  }
+
+  get manager() {
+    return this.#department.manager;
+  }
+
   set department(arg) {
     this.#department = arg;
   }
