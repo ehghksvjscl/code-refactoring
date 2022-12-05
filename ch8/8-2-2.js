@@ -8,10 +8,12 @@ class Account {
   get interestRate() {
     return this._interestRate;
   }
-}
 
-class AccountType {
-  constructor(nameString) {
-    this._name = nameString;
+  get number() {
+    return this._number;
+  }
+
+  get type() {
+    return this._type;
   }
 }
