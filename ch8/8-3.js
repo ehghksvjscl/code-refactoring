@@ -7,9 +7,7 @@ export function renderPerson(person) {
 }
 
 export function photoDiv(photo) {
-  return ['<div>', emitPhotoData(photo), '</div>'].join(
-    '\n'
-  );
+  return ['<div>', emitPhotoData(photo),'</div>'].join('\n');
 }
 
 function emitPhotoData(aPhoto) {
