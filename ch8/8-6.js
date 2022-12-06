@@ -12,3 +12,6 @@ function someFunc() {
   allocatedResources.push(result);
   return result;
 }
+
+// 관련된 것 끼리 묶기
+// 문장 정리 하기
