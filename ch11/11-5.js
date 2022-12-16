@@ -4,15 +4,21 @@ export class Order {
     this.itemPrice = itemPrice;
   }
 
-  get finalPrice() {
-    const basePrice = this.quantity * this.itemPrice;
-    let discountLevel;
-    if (this.quantity > 100) discountLevel = 2;
-    else discountLevel = 1;
-    return this.discountedPrice(basePrice, discountLevel);
+  get basePrice() {
+    return this.quantity * this.itemPrice;
   }
 
-  discountedPrice(basePrice, discountLevel) {
+  get discountLevel() {
+    return this.quantity > 100 
+      ? discountLevel = 2
+      : discountLevel = 1;
+  }
+
+  get finalPrice() {
+    return this.discountedPrice();
+  }
+
+  discountedPrice() {
     switch (discountLevel) {
       case 1:
         return basePrice * 0.95;
