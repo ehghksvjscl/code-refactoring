@@ -19,11 +19,14 @@ export class Order {
   }
 
   discountedPrice() {
-    switch (discountLevel) {
+    switch (this.discountLevel) {
       case 1:
-        return basePrice * 0.95;
+        return this.basePrice * 0.95;
       case 2:
-        return basePrice * 0.9;
+        return this.basePrice * 0.9;
     }
   }
 }
+
+
+// 더히기
