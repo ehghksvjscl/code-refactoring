@@ -1,6 +1,5 @@
 // 사용자 입장에서는 typeCode라는 것에 뭐가 들어가야 하는지 잘 모른다
 // 그래서 팩토리 함수를 생성해서 자동으로 생성 되게 하는 것이 좋다.
-// 단 이따 생성자는 있으면 안된다
 
 export class Employee {
   constructor(name, typeCode) {
