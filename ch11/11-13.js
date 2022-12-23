@@ -1,14 +1,14 @@
-const values = [];
+const values = [1,2];
 function getValueForPeriod(periodNumber) {
-  const value = values[periodNumber];
-  if (!value) {
-    throw new Error('value is undefined');
+  if (periodNumber < 0 || periodNumber >= values.length) {
+    return null
   }
-  return value;
+
+  return values[periodNumber];
 }
 
-try {
-  getValueForPeriod(-10);
-} catch (error) {
-  console.log('에러 발생!');
-}
+console.log(getValueForPeriod(-10));
+console.log(getValueForPeriod(1));
+
+// 에러 반환을 너무 남용하지 않도록 주의해야 한다.
+// 진짜 에러가 아니라면 에러를 반환하는 대신 null을 반환한다.
