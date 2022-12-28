@@ -1,9 +1,22 @@
-class Employee {}
+class Employee {
+  #name;
+  constructor(name) {
+    this.#name = name;
+  }
+
+  get name() {
+    return this.#name;
+  }
+}
 
 class Salesperson extends Employee {
-  #name;
+  constructor() {
+    super();
+  }
 }
 
 class Engineer extends Employee {
-  #name;
+  constructor() {
+    super();
+  }
 }
