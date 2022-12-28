@@ -1,6 +1,7 @@
 class Employee {
-  #quota;
 }
 
-class Engineer extends Employee {}
+class Engineer extends Employee {
+  #quota;
+}
 class Salesperson extends Employee {}
