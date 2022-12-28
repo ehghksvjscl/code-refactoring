@@ -1,6 +1,7 @@
 class Employee {
-  get quota() {}
 }
 
-class Engineer extends Employee {}
+class Engineer extends Employee {
+  get quota() {}
+}
 class Salesperson extends Employee {}
