@@ -1,12 +1,62 @@
+// 1. 소스코드를 이해 하자
+// 2. 이해한 소스코드를 기능별로 나누어 보자
+// 3. OOP로 리팩토링 하자
+
+// 단어 정리 (영어)
+// statement: 명세서
+// invoice: 청구서
+// play: 연극
+// performance: 공연
+// audience: 관객
+// volumeCredits: 포인트
+
+class Statement {
+  constructor(invoice, plays) {
+    this.invoice = invoice;
+    this.plays = plays;
+  }
+
+  get result() {}
+}
+
+function format(data) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  }).format(data);
+}
+
+class Play {
+  get totalAmount() {}
+  get totalVolumeCredits() {}
+
+  isAudience
+}
+
+class Tragedy extends Play {}
+
+class Comedy extends Play {}
+
+class UnknownPlayError extends Error {}
+
+
+function createPlay(data) {
+  switch (data.type) {
+    case 'tragedy': // 비극
+      return new c(data);
+    case 'comedy': // 희극
+      return new ComedyPlay(data);
+    default:
+      throw new Error(`알 수 없는 장르: ${data.type}`); // refeactoring
+  }
+}
+
+
 export function statement(invoice, plays) {
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `청구 내역 (고객명: ${invoice.customer})\n`;
-  const format = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format;
 
   for (let perf of invoice.performances) {
     const play = plays[perf.playID];
