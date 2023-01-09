@@ -1,76 +1,49 @@
-// 1. 소스코드를 이해 하자
-// 2. 이해한 소스코드를 기능별로 나누어 보자
-// 3. OOP로 리팩토링 하자
-
-// 단어 정리 (영어)
-// statement: 명세서
-// invoice: 청구서
-// play: 연극
-// performance: 공연
-// audience: 관객
-// volumeCredits: 포인트
-
-function format(data) {
-  return new Intl.NumberFormat('en-US', {
+export function statement(invoice, plays) {
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  let result = `청구 내역 (고객명: ${invoice.customer})\n`;
+  const format = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2,
-  }).format(data);
-}
+  }).format;
 
-class Statement {
-  constructor(invoice, plays) {
-    this._invoice = invoice;
-    this._plays = plays;
-    this._totalAmount = 0;
-    this._volumeCredits = 0;
-    this._result = `청구 내역 (고객명: ${invoice.customer})\n`;
-  }
+  for (let perf of invoice.performances) {
+    const play = plays[perf.playID];
+    let thisAmount = 0;
 
-  calculateAmount(perf, play) {
-    let result = 0
     switch (play.type) {
       case 'tragedy': // 비극
-        result = 40000;
-        return perf.audience > 30 
-          ? result += 1000 * (perf.audience - 30)
-          : result;
-
+        thisAmount = 40000;
+        if (perf.audience > 30) {
+          thisAmount += 1000 * (perf.audience - 30);
+        }
+        break;
       case 'comedy': // 희극
-        result = 30000;
-        result += perf.audience > 20 
-          ? 10000 + 500 * (perf.audience - 20)
-          : result;
-
-        return result +(300 * perf.audience);
+        thisAmount = 30000;
+        if (perf.audience > 20) {
+          thisAmount += 10000 + 500 * (perf.audience - 20);
+        }
+        thisAmount += 300 * perf.audience;
+        break;
       default:
         throw new Error(`알 수 없는 장르: ${play.type}`);
     }
-  }
 
-  calculateVolumeCredits(perf, play) {
-      let result = 0      
-      result += Math.max(perf.audience - 30, 0);
-      return 'comedy' === play.type 
-        ? result += Math.floor(perf.audience / 5)
-        : result;
-  
-  }
+    // 포인트를 적립한다.
+    volumeCredits += Math.max(perf.audience - 30, 0);
+    // 희극 관객 5명마다 추가 포인트를 제공한다.
+    if ('comedy' === play.type) volumeCredits += Math.floor(perf.audience / 5);
 
-  execute() {
-    for (let perf of this._invoice.performances) {
-      const play = this._plays[perf.playID];
-      let thisAmount = 0;
-      thisAmount += this.calculateAmount(perf, play);
-      this._volumeCredits += this.calculateVolumeCredits(perf, play);
-      
-      this._result += `  ${play.name}: ${format(thisAmount / 100)} (${perf.audience}석)\n`;
-      this._totalAmount += thisAmount;
-    }
-    this._result += `총액: ${format(this._totalAmount / 100)}\n`;
-    this._result += `적립 포인트: ${this._volumeCredits}점\n`;
-    return this._result;
+    // 청구 내역을 출력한다.
+    result += `  ${play.name}: ${format(thisAmount / 100)} (${
+      perf.audience
+    }석)\n`;
+    totalAmount += thisAmount;
   }
+  result += `총액: ${format(totalAmount / 100)}\n`;
+  result += `적립 포인트: ${volumeCredits}점\n`;
+  return result;
 }
 
 // 사용예:
@@ -100,7 +73,7 @@ const invoicesJSON = [
   },
 ];
 
-const result = new Statement(invoicesJSON[0], playsJSON).execute();
+const result = statement(invoicesJSON[0], playsJSON);
 const expected =
   '청구 내역 (고객명: BigCo)\n' +
   '  Hamlet: $650.00 (55석)\n' +
